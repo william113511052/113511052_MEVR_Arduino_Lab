@@ -13,9 +13,12 @@
 - 學習使用 Serial Monitor 觀察即時感測數據。
 
 ### 2. 設備與元件
+- PC
+- USB TYPE-B 線
 - Arduino Uno 開發板 x 1
 - 可變電阻 x 1
 - LED x 1、限流電阻 x 1
+- 杜邦線 若干
 
 ### 3. 操作說明與成果
 1. **電路連接**：可變電阻左右兩腳分別接 5V 與 GND，中間訊號腳接至 Analog In (如 A0~A5)。
