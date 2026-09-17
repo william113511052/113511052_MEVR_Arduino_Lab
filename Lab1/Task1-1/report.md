@@ -13,6 +13,8 @@
 - 學習使用 Serial Monitor 觀察即時感測數據。
 
 ### 2. 設備與元件
+- PC
+- USB TYPE-B 線
 - Arduino Uno 開發板 x 1
 - 可變電阻 x 1
 - LED x 1、限流電阻 x 1
