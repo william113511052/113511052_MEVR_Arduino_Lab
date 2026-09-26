@@ -1,26 +1,32 @@
-**`Lab2/Task2-3/report.md`（完整示範報告）**
+# Lab 2 課題報告：馬達驅動、感測器與中斷
 
-```markdown
-# 課題報告：Task 0-1 Hello World 序列埠輸出
-
-- **學生姓名**：[請填寫姓名]
-- **學生學號**：[請填寫學號]
-- **完成日期**：2026-XX-XX
+- **學生姓名**：[黃威霖]
+- **學生學號**：[113511052]
+- **完成日期**：2026-09-24
 
 ---
 
-### 1. 實驗目標(可參考課程投影片寫法)
-- 驗證 Arduino IDE 開發環境編譯與燒錄功能正常。
-- 掌握 `Serial.begin()` 與 `Serial.println()` 之使用方式。
-- 學習透過 Arduino IDE「序列埠監控器（Serial Monitor）」接收開發板訊息。
+## Advanced Task 2-3: External Interrupt vs Polling
+### 1. 實驗目標
+- 比較「外部中斷 (Interrupt)」與「輪詢 (Polling)」兩種偵測輸入機制的差異。
+- 模擬系統繁忙 (Blocking) 時，兩種機制的反應表現。
 
 ### 2. 設備與元件
-- Arduino Uno 開發板 x 1
 - USB Type-B 傳輸線 x 1
 - 個人電腦（已安裝 Arduino IDE）x 1
+- Arduino Uno 開發板 x 1
+- 按鍵開關 x 2 (Button A, Button B)
+- LED x 2 (LED A, LED B)、限流電阻 x 2
+- 下拉電阻 x 2
+- 麵包板 x 1
+- 杜邦線 若干
 
 ### 3. 操作說明與成果
-1. **燒錄程式**：使用 USB 線連接 Arduino Uno 至電腦，開啟 `Task0-1.ino` 並點擊「上傳」。
-2. **開啟監控器**：開啟 Arduino IDE 的 Serial Monitor，將鮑率（Baud rate）設為 **9600 baud**。
-3. **實驗成果**：序列埠監控器成功每秒印出一次 `Hello World from Arduino!` 訊息。
-4. **操作影片**：請參閱同目錄下 `video/Task0-1.mp4` 之實際操作畫面。
+1. **電路與邏輯**：
+   - **Set A**：延續 Task 2-3，利用**外部中斷**偵測 Button A，控制 LED A。
+   - **Set B**：在 `loop()` 內利用**輪詢**方式 (`digitalRead` 與邊緣觸發偵測) 讀取 Button B 控制 LED B。
+   - **Blocking 模擬**：在 `loop()` 結尾加入 `delay(2000)` 模擬系統繁忙。
+2. **觀察結果**：
+   - 系統繁忙期間按下 Button B (Polling)，程式卡在 delay 無法即時讀取按鍵，LED B 不會有反應或反應遲鈍。
+   - 系統繁忙期間按下 Button A (Interrupt)，由於硬體層級的強行介入，LED A 能即時切換狀態，不受 delay 影響。
+3. **實驗成果**：實驗驗證了中斷機制在響應即時性上的優勢，特別適合用於緊急停止或高優先級訊號捕捉的機電系統開發。
